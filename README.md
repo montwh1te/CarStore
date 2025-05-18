@@ -2,7 +2,7 @@
 
 Este projeto é uma aplicação ASP.NET Core MVC para cadastro de **clientes**, **carros**, **vendedores** e **notas fiscais de venda**.
 
-## ??? Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - .NET 6
 - ASP.NET Core MVC
@@ -10,7 +10,7 @@ Este projeto é uma aplicação ASP.NET Core MVC para cadastro de **clientes**, **c
 - SQLite Toolbox (SQLite / SQL Server Compact Toolbox) 
 - Visual Studio 2022
 
-## ?? Sobre o Projeto
+## Sobre o Projeto
 
 O sistema permite:
 
@@ -18,7 +18,7 @@ O sistema permite:
 - Relacionar notas fiscais a clientes, carros e vendedores.
 - Persistência de dados usando **SQLite**.
 
-## ??? Banco de Dados
+## Banco de Dados
 
 Foi utilizado **SQLite** para facilitar o desenvolvimento local.
 
@@ -30,7 +30,7 @@ Foi utilizado **SQLite** para facilitar o desenvolvimento local.
   - Inserir e consultar dados manualmente
   - Executar comandos SQL
 	
-## ?? Dependências
+## Dependências
 
 Ao clonar este projeto, certifique-se de restaurar os pacotes NuGet:
 
@@ -38,7 +38,7 @@ Ao clonar este projeto, certifique-se de restaurar os pacotes NuGet:
 dotnet restore
 ```
 
-## ?? Como Executar
+## Como Executar
 
 1. Clone o repositório
 2. Abra no Visual Studio 2022
