@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarStore.Data;
 using CarStore.Models;
+using CarStore.Models.ViewModels;
 
 namespace CarStore.Controllers
 {
@@ -50,10 +51,15 @@ namespace CarStore.Controllers
         // GET: Notas/Create
         public IActionResult Create()
         {
-            ViewData["CarroId"] = new SelectList(_context.Carros, "Id", "Id");
-            ViewData["CompradorId"] = new SelectList(_context.Clientes, "Id", "Id");
-            ViewData["VendedorId"] = new SelectList(_context.Vendedores, "Id", "Id");
-            return View();
+            // ViewData["CarroId"] = new SelectList(_context.Carros, "Id", "MarcaModelo");
+            // ViewData["CompradorId"] = new SelectList(_context.Clientes, "Id", "NomeCPF");
+            // ViewData["VendedorId"] = new SelectList(_context.Vendedores, "Id", "NomeMatricula");
+            ViewModelNota viewModelNota = new ViewModelNota();
+            viewModelNota.Carros = _context.Carros.ToList();
+            viewModelNota.Clientes = _context.Clientes.ToList();
+            viewModelNota.Vendedores = _context.Vendedores.ToList();
+
+            return View(viewModelNota);
         }
 
         // POST: Notas/Create
@@ -63,20 +69,26 @@ namespace CarStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Numero,DataEmissao,Garantia,ValorVenda,CompradorId,VendedorId,CarroId")] Nota nota)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(nota);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            } else
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                Console.WriteLine("Erros: " + string.Join(", ", errors));
-            }
-            ViewData["CarroId"] = new SelectList(_context.Carros, "Id", "Id", nota.CarroId);
-            ViewData["CompradorId"] = new SelectList(_context.Clientes, "Id", "Id", nota.CompradorId);
-            ViewData["VendedorId"] = new SelectList(_context.Vendedores, "Id", "Id", nota.VendedorId);
-            return View(nota);
+            //if (ModelState.IsValid)
+            //{
+            _context.Add(nota);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            //} else
+            //{
+            //   var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+            //  Console.WriteLine("Erros: " + string.Join(", ", errors));
+            //}
+            //ViewData["CarroId"] = new SelectList(_context.Carros, "Id", "MarcaModelo", nota.CarroId);
+            //ViewData["CompradorId"] = new SelectList(_context.Clientes, "Id", "NomeCPF", nota.CompradorId);
+            //ViewData["VendedorId"] = new SelectList(_context.Vendedores, "Id", "NomeMatricula", nota.VendedorId);
+
+            /* ViewModelNota viewModelNota = new ViewModelNota();
+            viewModelNota.Nota = nota;
+            viewModelNota.Carros = _context.Carros.ToList();
+            viewModelNota.Clientes = _context.Clientes.ToList();
+            viewModelNota.Vendedores = _context.Vendedores.ToList(); 
+            return View(viewModelNota); */
         }
 
 
@@ -94,10 +106,12 @@ namespace CarStore.Controllers
             {
                 return NotFound();
             }
-            ViewData["CarroId"] = new SelectList(_context.Carros, "Id", "Id", nota.CarroId);
-            ViewData["CompradorId"] = new SelectList(_context.Clientes, "Id", "Id", nota.CompradorId);
-            ViewData["VendedorId"] = new SelectList(_context.Vendedores, "Id", "Id", nota.VendedorId);
-            return View(nota);
+            ViewModelNota viewModelNota = new ViewModelNota();
+            viewModelNota.Nota = nota;
+            viewModelNota.Carros = _context.Carros.ToList();
+            viewModelNota.Clientes = _context.Clientes.ToList();
+            viewModelNota.Vendedores = _context.Vendedores.ToList(); 
+            return View(viewModelNota);
         }
 
         // POST: Notas/Edit/5
@@ -107,7 +121,7 @@ namespace CarStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Numero,DataEmissao,Garantia,ValorVenda,CompradorId,VendedorId,CarroId")] Nota nota)
         {
-            if (id != nota.Id)
+            /*if (id != nota.Id)
             {
                 return NotFound();
             }
@@ -115,10 +129,10 @@ namespace CarStore.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
-                    _context.Update(nota);
-                    await _context.SaveChangesAsync();
-                }
+                {*/
+                _context.Update(nota);
+                await _context.SaveChangesAsync();
+                /* }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!NotaExists(nota.Id))
@@ -129,13 +143,9 @@ namespace CarStore.Controllers
                     {
                         throw;
                     }
-                }
+                } */
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["CarroId"] = new SelectList(_context.Carros, "Id", "Id", nota.CarroId);
-            ViewData["CompradorId"] = new SelectList(_context.Clientes, "Id", "Id", nota.CompradorId);
-            ViewData["VendedorId"] = new SelectList(_context.Vendedores, "Id", "Id", nota.VendedorId);
-            return View(nota);
+            //}
         }
 
         // GET: Notas/Delete/5

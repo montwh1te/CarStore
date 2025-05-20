@@ -13,6 +13,8 @@
             return Salario * 0.1m;
         }
 
+        public string NomeMatricula => $"{Nome} {Matricula}";
+
         public ICollection<Nota> Notas { get; set; } = new List<Nota>();
     }
 }

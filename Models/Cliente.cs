@@ -11,6 +11,8 @@
         public string Endereco { get; set; } = string.Empty;
         public string CPF { get; set; } = string.Empty;
 
+        public string NomeCPF => $"{Nome} - {CPF}";
+
         public ICollection<Nota> Notas { get; set; } = new List<Nota>();
     }
 }
